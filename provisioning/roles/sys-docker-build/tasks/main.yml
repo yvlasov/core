@@ -31,10 +31,10 @@
         owner={{ ansible_ssh_user }}
         mode=777
 
-- name: create "pintostack-building-{{ docker_name }}.json"
+- name: create "sys-building-{{ docker_name }}.json"
   template: src="docker-build.json.j2"
-            dest="/home/{{ ansible_ssh_user }}/marathon/pintostack-building-{{ docker_name }}.json"
+            dest="/home/{{ ansible_ssh_user }}/marathon/sys-building-{{ docker_name }}.json"
             force=yes
 
-- name: submit task /pintostack/building-{{ docker_name }} to marathon
-  command: curl -X POST -H "Content-Type{{':'}} application/json" -d @/home/{{ ansible_ssh_user }}/marathon/pintostack-building-{{ docker_name }}.json http://consul.service.consul:8080/v2/apps
+- name: submit task /sys/building-{{ docker_name }} to marathon
+  command: curl -X POST -H "Content-Type{{':'}} application/json" -d @/home/{{ ansible_ssh_user }}/marathon/sys-building-{{ docker_name }}.json http://consul.service.consul:8080/v2/apps

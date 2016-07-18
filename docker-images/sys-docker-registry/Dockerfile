@@ -1,5 +1,4 @@
-FROM pintostack-base
-
+FROM pytnru/sys-base
 
 RUN sudo apt-get install -y \
  build-essential \

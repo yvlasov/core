@@ -1,4 +1,4 @@
-FROM pintostack/pintostack-mesos
+FROM pytnru/sys-mesos
 
 RUN mkdir -p /usr/share/scala/scala-2.11.5
 ADD http://www.scala-lang.org/files/archive/scala-2.11.5.tgz /tmp/scala-2.11.5.tgz

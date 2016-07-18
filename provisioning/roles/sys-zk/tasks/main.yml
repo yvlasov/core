@@ -3,8 +3,8 @@
   register: containers
 
 - name: run zk
-  shell: docker run --net="host" -d --name=pintostack-zk-container pintostack/pintostack-zk
-  when: "{{ 'pintostack-zk-container' not in containers.stdout }}"
+  shell: docker run --net="host" -d --name=sys-zk-container pytnru/sys-zk
+  when: "{{ 'sys-zk-container' not in containers.stdout }}"
 
 - name: register in consul service
   template: src=zookeeper_tmp.j2

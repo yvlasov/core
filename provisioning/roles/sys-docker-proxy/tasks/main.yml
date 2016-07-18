@@ -28,12 +28,12 @@
             mode=666
 
 - name: create docker-proxy
-  shell: docker create --net="host" --name=pintostack-docker-proxy-container --restart=always -v /var/lib/registry-cache:/var/lib/registry-cache docker-proxy /var/lib/registry-cache/config.yml 
-  when: "{{ 'pintostack-docker-proxy-container' not in containers.stdout }}"
+  shell: docker create --net="host" --name=sys-docker-proxy-container --restart=always -v /var/lib/registry-cache:/var/lib/registry-cache docker-proxy /var/lib/registry-cache/config.yml 
+  when: "{{ 'sys-docker-proxy-container' not in containers.stdout }}"
 
 - name: start docker-proxy
-  shell: docker start pintostack-docker-proxy-container
-  when: "{{ 'pintostack-docker-proxy-container' not in running.stdout }}"
+  shell: docker start sys-docker-proxy-container
+  when: "{{ 'sys-docker-proxy-container' not in running.stdout }}"
 
 - name: register docker-proxy in consul
   template: src=docker-proxy.json.j2

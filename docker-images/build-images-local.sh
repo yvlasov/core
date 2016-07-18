@@ -2,23 +2,23 @@
 set -e
 
 CPATH=$(pwd)
-cd $CPATH/pintostack-base
-docker build -t pintostack/pintostack-base .
+cd $CPATH/sys-base
+docker build -t pytnru/sys-base .
 
-cd $CPATH/pintostack-base-mesos
-docker build -t pintostack/pintostack-base-mesos .
+cd $CPATH/sys-base-mesos
+docker build -t pytnru/sys-base-mesos .
 
-cd $CPATH/pintostack-marathon
-docker build -t pintostack/pintostack-marathon .
+cd $CPATH/sys-marathon
+docker build -t pytnru/sys-marathon .
 
-cd $CPATH/pintostack-mesos
-docker build -t pintostack/pintostack-mesos .
+cd $CPATH/sys-mesos
+docker build -t pytnru/sys-mesos .
 
-cd $CPATH/pintostack-mesos-slave
-docker build -t pintostack/pintostack-mesos-slave .
+cd $CPATH/sys-mesos-slave
+docker build -t pytnru/sys-mesos-slave .
 
-cd $CPATH/pintostack-zk
-docker build -t pintostack/pintostack-zk .
+cd $CPATH/sys-zk
+docker build -t pytnru/sys-zk .
 
 cd $CPATH
 

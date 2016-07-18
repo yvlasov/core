@@ -1,4 +1,4 @@
-FROM pintostack/pintostack-base-mesos
+FROM pytnru/sys-base-mesos
 
 ## MARATHON ##
 ADD http://downloads.mesosphere.com/marathon/v0.15.0/marathon-0.15.0.tgz /tmp/marathon.tgz

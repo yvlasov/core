@@ -11,5 +11,5 @@ ENV PATH $JAVA_HOME/bin:$PATH
 
 ##
 # This image is not supposed to be started as a container
-# docker build -t pintostack/pintostack-base .
+# docker build -t pytnru/sys-base .
 ##

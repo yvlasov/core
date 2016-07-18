@@ -28,12 +28,12 @@
             mode=666
 
 - name: create docker-registry
-  shell: docker create --net="host" --name=pintostack-docker-registry-container --restart=always -v /var/lib/registry:/var/lib/registry docker-registry /var/lib/registry/config.yml 
-  when: "{{ 'pintostack-docker-registry-container' not in containers.stdout }}"
+  shell: docker create --net="host" --name=sys-docker-registry-container --restart=always -v /var/lib/registry:/var/lib/registry docker-registry /var/lib/registry/config.yml 
+  when: "{{ 'sys-docker-registry-container' not in containers.stdout }}"
 
 - name: start docker-registry
-  shell: docker start pintostack-docker-registry-container
-  when: "{{ 'pintostack-docker-registry-container' not in running.stdout }}"
+  shell: docker start sys-docker-registry-container
+  when: "{{ 'sys-docker-registry-container' not in running.stdout }}"
 
 - name: register docker-registry in consul
   template: src=docker-registry.json.j2

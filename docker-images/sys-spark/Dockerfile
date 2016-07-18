@@ -1,4 +1,4 @@
-FROM pintostack/pintostack-mesos-slave
+FROM pytnru/sys-mesos-slave
 
 RUN cp -R /usr/lib/spark/bin/* /bin/
 RUN cp -R /usr/lib/spark/sbin/* /sbin/

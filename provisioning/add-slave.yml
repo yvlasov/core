@@ -48,7 +48,7 @@
   sudo: yes
   gather_facts: true
   roles:   
-    - role: pintostack-mesos-slave
+    - role: sys-mesos-slave
     - role: ansible-registrator
       registrator_consul_host: "{{ inventory_hostname }}.node.consul"
       registrator_consul_port: "8500"
