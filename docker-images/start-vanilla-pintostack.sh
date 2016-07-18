@@ -12,7 +12,7 @@ fi
 
 #Run ZK
 docker run --net="host" -d \
- pintostack-zk
+ sys-zk
 
 #Run Mesos Master
 docker run --net="host" \
@@ -25,7 +25,7 @@ docker run --net="host" \
 -e "MESOS_REGISTRY=in_memory" \
 -e "MESOS_WORK_DIR=/var/lib/mesos" \
 -d \
- pintostack-mesos
+ sys-mesos
 
 
 #Run marathon
@@ -33,7 +33,7 @@ docker run --net="host" \
 docker run --net="host" \
 -d \
 -p 8080:8080 \
-pintostack-marathon --master zk://${MASTER_IP}:2181/mesos --zk zk://${MASTER_IP}:2181/marathon
+sys-marathon --master zk://${MASTER_IP}:2181/mesos --zk zk://${MASTER_IP}:2181/marathon
 
 #Run Mesos Slave
 
@@ -50,5 +50,5 @@ docker run  \
 -v $(which docker):/bin/docker   \
 -v /usr/lib/x86_64-linux-gnu/libapparmor.so.1:/usr/lib/x86_64-linux-gnu/libapparmor.so.1 \
 -e "MESOS_WORK_DIR=/var/lib/mesos" \
--d pintostack-mesos-slave --containerizers=docker
+-d sys-mesos-slave --containerizers=docker
 

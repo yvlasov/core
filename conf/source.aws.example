@@ -7,16 +7,16 @@ source conf/source.global
 
 RESOURCE_PROVIDER='aws'
 VPC_IF='eth0'
-SSH_KEY_FILE=/pintostack/conf/pinto.pem
+SSH_KEY_FILE=/home/yvlasov/Downloads/pinto.pem
 
-AWS_KEY_ID=''
-AWS_ACCESS_KEY=''
+AWS_KEY_ID='IDoFsUPERsecRETkeY'
+AWS_ACCESS_KEY='SuperSecRETkeYHERE'
 AWS_KEYPAIR_NAME='pinto'
-AWS_AMI='ami-df6a8b9b'
-AWS_INSTANCE_TYPE='m3.large'
-AWS_ROOT_PARTITION_SIZE=50
-AWS_REGION='us-west-1'
+AWS_AMI='ami-fce3c696'
+AWS_INSTANCE_TYPE='t2.micro'
+AWS_ROOT_PARTITION_SIZE=10
+AWS_REGION='us-east-1'
 AWS_TERMINATE_ON_SHUTDOWN='true'
-AWS_SECURITY_GROUPS="default,default-ssh"
+AWS_SECURITY_GROUPS="default"
 AWS_SSH_USERNAME='ubuntu'
 
