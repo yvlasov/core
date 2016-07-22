@@ -19,10 +19,10 @@ RUN vagrant plugin install digital_ocean vagrant-digitalocean vagrant-managed-se
 # Patch ssh connection in ansible, it couldn't work with ansible.
 RUN sed -i -- 's/$HOME\/.ansible\/cp/\/tmp/g' /usr/local/lib/python2.7/dist-packages/ansible/plugins/connection/ssh.py
 
-ADD . /pintostack
-RUN rm -rf /pintostack/conf
-RUN rm -rf /pintostack/.vagrant
-RUN rm -rf /pintostack/.git
+ADD . /sys
+RUN rm -rf /sys/conf
+RUN rm -rf /sys/.vagrant
+RUN rm -rf /sys/.git
 RUN echo "while true; do echo 'running..'; sleep 60; done" > /s.sh
 RUN chmod +x /s.sh
 
