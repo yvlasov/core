@@ -1,23 +1,43 @@
 {
-      "id": "/sys/building-{{ docker_name }}",
-      "instances": 1,
-      "cmd": "curl -O http://docker-registry.service.consul/docker-build/{{ docker_name }}.tgz && tar -xvf {{ docker_name }}.tgz && docker build -t {{ docker_name }} docker/{{ docker_name }} && docker tag -f {{ docker_name }} docker-registry.service.consul:5000/{{ docker_name }} && docker push docker-registry.service.consul:5000/{{ docker_name }} && curl -X DELETE http://consul.service.consul:8080/v2/apps/sys/building-{{ docker_name }}",
-      "cpus": 0.5,
-      "mem": 768,
-      "container": {
-            "type": "DOCKER",
-            "docker": {
-              "image": "pytnru/sys-base",
-      			  "forcePullImage": false,
-      			  "network": "BRIDGE",
-      			  "privileged": false,
-              "parameters": [
-                { "key": "volume", "value": "/var/run/docker.sock:/var/run/docker.sock" },
-                { "key": "volume", "value": "/lib/x86_64-linux-gnu/libsystemd-journal.so.0:/lib/x86_64-linux-gnu/libsystemd-journal.so.0" },
-                { "key": "volume", "value": "/usr/lib/x86_64-linux-gnu/libltdl.so.7" },
-                { "key": "volume", "value": "/usr/bin/docker:/bin/docker" },
-                { "key": "volume", "value": "/usr/lib/x86_64-linux-gnu/libapparmor.so.1:/usr/lib/x86_64-linux-gnu/libapparmor.so.1" }
-              ]
-            }
+  "id": "/sys/building-{{ docker_name }}",
+  "instances": 1,
+  "cmd": "curl -O http://docker-registry.service.consul/docker-build/{{ docker_name }}.tgz && tar -xvf {{ docker_name }}.tgz && docker build -t {{ docker_name }} docker/{{ docker_name }} && docker tag -f {{ docker_name }} docker-registry.service.consul:5000/{{ docker_name }} && docker push docker-registry.service.consul:5000/{{ docker_name }} && curl -X DELETE http://consul.service.consul:8080/v2/apps/sys/building-{{ docker_name }}",
+  "cpus": 0.5,
+  "mem": 768,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [
+      {
+        "containerPath": "/bin/docker",
+        "hostPath": "/usr/bin/docker",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/usr/lib/x86_64-linux-gnu/libltdl.so.7",
+        "hostPath": "/usr/lib/x86_64-linux-gnu/libltdl.so.7",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/lib/x86_64-linux-gnu/libsystemd-journal.so.0",
+        "hostPath": "/lib/x86_64-linux-gnu/libsystemd-journal.so.0",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/usr/lib/x86_64-linux-gnu/libapparmor.so.1",
+        "hostPath": "/usr/lib/x86_64-linux-gnu/libapparmor.so.1",
+        "mode": "RO"
       }
+    ],
+    "docker": {
+      "image": "pytnru/sys-base",
+      "forcePullImage": false,
+      "network": "BRIDGE",
+      "privileged": false
+    }
+  }
 }
