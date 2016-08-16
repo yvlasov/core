@@ -1,4 +1,4 @@
-FROM pytnru/sys-base-mesos
+FROM __sys_dkr_repo_name/sys-base-mesos:__sys_dkr_ver_tag
 
 RUN mkdir -p /etc/mesos-master
 RUN echo in_memory | dd of=/etc/mesos-master/registry

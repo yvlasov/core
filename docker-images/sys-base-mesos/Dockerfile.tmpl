@@ -1,0 +1,11 @@
+FROM __sys_dkr_repo_name/sys-base:__sys_dkr_ver_tag
+
+RUN echo "deb http://repos.mesosphere.io/ubuntu/ xenial main" > /etc/apt/sources.list.d/mesosphere.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+
+# Fixed version 1.0.0-2.0.86.ubuntu1604, the latest as of Feb 9 2016.
+RUN apt-get update && apt-get install -y mesos=__mesos_version
+##
+# This image is not supposed to be started as a container
+# docker build -t __sys_dkr_repo_name/sys-base .
+##

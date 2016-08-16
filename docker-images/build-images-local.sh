@@ -1,25 +1,29 @@
 #!/usr/bin/env bash
 set -e
 
+source ../conf/source.global
+
+function mkDockerfile {
+  rm -f Dockerfile
+  rm -f Dockerfile.bak
+  cp Dockerfile.tmpl Dockerfile
+  sed -i.bak "s/__sys_dkr_repo_name/$sys_dkr_repo_name/g" Dockerfile
+  sed -i.bak "s/__sys_dkr_ver_tag/$sys_dkr_ver_tag/g" Dockerfile
+  sed -i.bak "s/__debian_version/$debian_version/g" Dockerfile
+  sed -i.bak "s/__mesos_version/$mesos_version/g" Dockerfile
+  sed -i.bak "s/__java_version/$java_version/g" Dockerfile
+  sed -i.bak "s/__spark_version/$spark_version/g" Dockerfile
+  rm -f Dockerfile.bak
+}
+
+
 CPATH=$(pwd)
-cd $CPATH/sys-base
-docker build -t pytnru/sys-base .
 
-cd $CPATH/sys-base-mesos
-docker build -t pytnru/sys-base-mesos .
-
-cd $CPATH/sys-marathon
-docker build -t pytnru/sys-marathon .
-
-cd $CPATH/sys-mesos
-docker build -t pytnru/sys-mesos .
-
-cd $CPATH/sys-mesos-slave
-docker build -t pytnru/sys-mesos-slave .
-
-cd $CPATH/sys-zk
-docker build -t pytnru/sys-zk .
-
-cd $CPATH
+for each in sys-base sys-base-mesos sys-marathon sys-mesos sys-mesos-slave sys-zk ; do
+	cd $CPATH/$each
+	mkDockerfile
+	docker build -t $sys_dkr_repo_name/$each:$sys_dkr_ver_tag .
+	cd $CPATH
+done
 
 echo "Done"

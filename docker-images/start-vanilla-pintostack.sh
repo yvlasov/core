@@ -12,7 +12,7 @@ fi
 
 #Run ZK
 docker run --net="host" -d \
- sys-zk
+ $sys_dkr_repo_name/sys-zk:$sys_dkr_ver_tag
 
 #Run Mesos Master
 docker run --net="host" \
@@ -25,15 +25,14 @@ docker run --net="host" \
 -e "MESOS_REGISTRY=in_memory" \
 -e "MESOS_WORK_DIR=/var/lib/mesos" \
 -d \
- sys-mesos
-
+ $sys_dkr_repo_name/sys-mesos:$sys_dkr_ver_tag
 
 #Run marathon
 
 docker run --net="host" \
 -d \
 -p 8080:8080 \
-sys-marathon --master zk://${MASTER_IP}:2181/mesos --zk zk://${MASTER_IP}:2181/marathon
+$sys_dkr_repo_name/sys-marathon:$sys_dkr_ver_tag --master zk://${MASTER_IP}:2181/mesos --zk zk://${MASTER_IP}:2181/marathon
 
 #Run Mesos Slave
 
@@ -50,5 +49,5 @@ docker run  \
 -v $(which docker):/bin/docker   \
 -v /usr/lib/x86_64-linux-gnu/libapparmor.so.1:/usr/lib/x86_64-linux-gnu/libapparmor.so.1 \
 -e "MESOS_WORK_DIR=/var/lib/mesos" \
--d sys-mesos-slave --containerizers=docker
+-d $sys_dkr_repo_name/sys-mesos-slave:$sys_dkr_ver_tag --containerizers=docker
 

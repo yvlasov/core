@@ -8,3 +8,10 @@ SLAVES=3
 ANSIBLE_INVENTORY_FILE='.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory'
 ANSIBLE_OPTS=''
 VPC_IF=eth1
+
+sys_dkr_repo_name="pytnru"
+sys_dkr_ver_tag="1604-mesos10"
+debian_version="16.04"
+java_version="8"
+mesos_version="1.0.0-2.0.86.ubuntu1604"
+spark_version=""
