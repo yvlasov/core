@@ -42,9 +42,9 @@
       consul_servers: "{{ masters }}"
     - role: ansible-beats
       when: inventory_hostname not in groups["masters"]
-    - role: pintostack-docker-proxy
+    - role: sys-docker-proxy
       when: inventory_hostname == "master-1"
-    - role: pintostack-docker-registry
+    - role: sys-docker-registry
       when: inventory_hostname == "master-1"
     - role: ansible-nginx
       nginx_worker_processes: 1

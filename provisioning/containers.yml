@@ -11,8 +11,8 @@
   gather_facts: false
   sudo: yes
   tasks:
-  - name: Warming up docker cache with pintostack/pintostack-mesos-slave
-    shell: docker pull pintostack/pintostack-mesos-slave 
+  - name: Warming up docker cache with pytnru/sys-mesos-slave
+    shell: docker pull pytnru/sys-mesos-slave 
 
 - hosts: masters
   user: "{{ ansible_ssh_user }}"
@@ -30,10 +30,10 @@
 
   roles:
 # TODO  zoo_id: "{{ my_zoo_id }}", zookeeper_hosts: "{{ masters|to_zk }}
-    - role: pintostack-zk
+    - role: sys-zk
 # TODO: #      quorum: "{{ my_quorum }}",
-    - role: pintostack-mesos-master
-    - role: pintostack-marathon
+    - role: sys-mesos-master
+    - role: sys-marathon
   post_tasks:
     - shell:  iptables -t nat -I PREROUTING -p tcp -d {{ ansible_default_ipv4.address }} --dport {{ item }} -j DNAT --to-destination {{ local_ip }}:{{ item }}
       with_items:
@@ -55,7 +55,7 @@
   pre_tasks:
     - include: pre_tasks_slaves.yml
   roles:
-    - role: pintostack-mesos-slave
+    - role: sys-mesos-slave
     - role: ansible-registrator
       registrator_consul_host: "{{ inventory_hostname }}.node.consul"
       registrator_consul_port: "8500"
